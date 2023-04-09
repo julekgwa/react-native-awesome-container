@@ -5,9 +5,7 @@ import { Colors } from '../colors';
 import React from 'react';
 
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-
-import { Dialog } from 'react-native-ui-lib';
-
+import Modal from 'react-native-modal';
 import { scale, verticalScale } from 'react-native-size-matters';
 
 import { POPUP_TYPE } from '../constants';
@@ -71,47 +69,49 @@ export const Popup = ({
   callback = () => {},
 }: Props) => {
   return (
-    <Dialog visible={visible} containerStyle={[styles.dialog]}>
-      <View
-        style={[
-          styles.imageContainer,
-          {
-            backgroundColor: getIconBgColor(type),
-          },
-          iconContentStyle,
-        ]}
-      >
-        {type && <View>{renderIcon(type, iconColor)}</View>}
-      </View>
-      <View style={styles.titleContainer}>
-        <Text style={[styles.Title]}>{title}</Text>
+    <Modal backdropOpacity={0.3} isVisible={visible}>
+      <View style={styles.dialog}>
         <View
           style={[
-            styles.underline,
+            styles.imageContainer,
             {
               backgroundColor: getIconBgColor(type),
             },
+            iconContentStyle,
           ]}
-        />
-      </View>
-      <View style={[styles.Content, contentStyle]}>
-        <Text style={[styles.Desc, textBodyStyle]}>{textBody}</Text>
-        <TouchableOpacity
-          style={[styles.Button, buttonStyle]}
-          onPress={callback}
         >
-          <Text
+          {type && <View>{renderIcon(type, iconColor)}</View>}
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={[styles.Title]}>{title}</Text>
+          <View
             style={[
-              styles.TextButton,
-              { color: getIconBgColor(type) },
-              buttonTextStyle,
+              styles.underline,
+              {
+                backgroundColor: getIconBgColor(type),
+              },
             ]}
+          />
+        </View>
+        <View style={[styles.Content, contentStyle]}>
+          <Text style={[styles.Desc, textBodyStyle]}>{textBody}</Text>
+          <TouchableOpacity
+            style={[styles.Button, buttonStyle]}
+            onPress={callback}
           >
-            {buttonText}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.TextButton,
+                { color: getIconBgColor(type) },
+                buttonTextStyle,
+              ]}
+            >
+              {buttonText}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </Dialog>
+    </Modal>
   );
 };
 
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(40),
     borderRadius: scale(5),
     backgroundColor: Colors.White,
+    overflow: 'hidden',
     position: 'relative',
   },
   titleContainer: {

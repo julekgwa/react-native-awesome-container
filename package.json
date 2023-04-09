@@ -84,10 +84,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
-    "react-native-svg": "*",
-    "react-native-reanimated": "*",
-    "react-native-gesture-handler": "*"
+    "react-native": "*"
   },
   "engines": {
     "node": ">= 16.0.0"
@@ -167,11 +164,9 @@
     ]
   },
   "dependencies": {
-    "@react-native-community/blur": "*",
-    "@react-native-community/clipboard": "*",
-    "@react-native-community/netinfo": "*",
     "react-native-animated-spinkit": "*",
+    "react-native-modal": "*",
     "react-native-size-matters": "*",
-    "react-native-ui-lib": "*"
+    "react-native-svg": "*"
   }
 }

@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { Container } from 'react-native-awesome-container';
-import { Button } from 'react-native-ui-lib';
 
 export default function App() {
   const [showPopup, setShowPopup] = React.useState(false);
@@ -47,11 +46,11 @@ export default function App() {
         spinnerColor="blue"
         style={styles.box}
       >
-        <Button onPress={() => setShowPopup(true)} label="Show Popup" />
-        <Button onPress={() => setIsLoading(true)} label="Show Loader" />
+        <Button onPress={() => setShowPopup(true)} title="Show Popup" />
+        <Button onPress={() => setIsLoading(true)} title="Show Loader" />
       </Container>
       {isLoading && (
-        <Button onPress={() => setIsLoading(false)} label="Stop Loader" />
+        <Button onPress={() => setIsLoading(false)} title="Stop Loader" />
       )}
     </View>
   );
