@@ -164,7 +164,7 @@
     ]
   },
   "dependencies": {
-    "@react-native-community/netinfo": "^9.3.9",
+    "@react-native-community/netinfo": "*",
     "react-native-animated-spinkit": "*",
     "react-native-modal": "*",
     "react-native-size-matters": "*",
