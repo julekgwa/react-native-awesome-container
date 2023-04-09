@@ -1,7 +1,7 @@
 {
   "name": "react-native-awesome-container",
   "version": "0.1.0",
-  "description": "test",
+  "description": "An easy-to-use React Native library that provides a View component with built-in loaders and popups. This library is designed to simplify the process of adding loading and popup functionality to your React Native Views with minimal setup.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -51,17 +51,19 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.2.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@evilmartians/lefthook": "^1.2.2",
     "@react-native-community/eslint-config": "^3.0.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
-    "@types/react": "~17.0.21",
+    "@types/react": "^18.0.33",
     "@types/react-native": "0.70.0",
+    "babel-plugin-module-resolver": "^5.0.0",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",
     "pod-install": "^0.1.0",
@@ -73,11 +75,14 @@
     "typescript": "^4.5.2"
   },
   "resolutions": {
-    "@types/react": "17.0.21"
+    "@types/react": "*"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-svg": "*",
+    "react-native-reanimated": "*",
+    "react-native-gesture-handler": "*"
   },
   "engines": {
     "node": ">= 16.0.0"
@@ -155,5 +160,13 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "@react-native-community/blur": "*",
+    "@react-native-community/clipboard": "*",
+    "@react-native-community/netinfo": "*",
+    "react-native-animated-spinkit": "*",
+    "react-native-size-matters": "*",
+    "react-native-ui-lib": "*"
   }
 }

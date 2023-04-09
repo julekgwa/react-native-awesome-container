@@ -1,18 +1,58 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-awesome-container';
+import { StyleSheet, View } from 'react-native';
+import { Container } from 'react-native-awesome-container';
+import { Button } from 'react-native-ui-lib';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [showPopup, setShowPopup] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [popupMessage, setPopupMessage] = React.useState('');
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    (async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.scom/todos/1'
+        );
+
+        if (!response.ok) {
+          throw new Error('Unable to get todos');
+        }
+        console.log(await response.json());
+      } catch (error: any) {
+        setShowPopup(true);
+        setPopupMessage(error?.message);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Container
+        isLoading={isLoading}
+        popupMessage={
+          popupMessage || "You've successfully displayed a message."
+        }
+        popupTitle="Error"
+        buttonText="OK"
+        popupType={'Danger'}
+        onPressPopup={() => setShowPopup(false)}
+        showPopup={showPopup}
+        spinner={'Grid'}
+        spinnerColor="blue"
+        style={styles.box}
+      >
+        <Button onPress={() => setShowPopup(true)} label="Show Popup" />
+        <Button onPress={() => setIsLoading(true)} label="Show Loader" />
+      </Container>
+      {isLoading && (
+        <Button onPress={() => setIsLoading(false)} label="Stop Loader" />
+      )}
     </View>
   );
 }
@@ -20,12 +60,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 80,
+    paddingHorizontal: 30,
+    paddingBottom: 30,
   },
   box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+    flex: 1,
+    gap: 10,
   },
 });
