@@ -38,7 +38,12 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "container",
+    "awesome container",
+    "react-native-popup",
+    "react-native-loader",
+    "react-native-spinner"
   ],
   "repository": "https://github.com/julekgwa/react-native-awesome-container",
   "author": "Junius Lekgwara <phutigravel@gmail.com> (https://github.com/julekgwa)",
