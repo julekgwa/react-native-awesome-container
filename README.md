@@ -4,6 +4,8 @@
 
 An easy-to-use React Native library that provides a View component with built-in loaders and popups. This library is designed to simplify the process of adding loading and popup functionality to your React Native Views with minimal setup.
 
+[Expo Snack example](https://snack.expo.dev/@lekgwaraj/react-native-awesome-container)
+
 ## Installation
 
 ```sh
@@ -15,7 +17,7 @@ yarn add react-native-awesome-container
 ```js
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Container from 'react-native-awesome-container';
+import { Container } from 'react-native-awesome-container';
 
 // ...
 
@@ -83,6 +85,28 @@ const styles = StyleSheet.create({
 ```
 
 ![example](example/assets/example.gif)
+
+## Properties
+
+| Prop  | Default  | Type | Description |
+| :------------ |:---------------:| :---------------:| :-----|
+| showPopup | `false` | `boolean` | Visibility of the Popup |
+| popupType |  | `string` | Type of Popup (`Danger`, `Success` or `Warning`)  |
+| popupTitle |  | `string` | Popup title |
+| popupMessage |  | `string` | Popup message |
+| onPressPopup | () => {} | `function` | onPress Popup button
+| children | | `ReactNode` | React components
+| isLoading | `false` | `boolean` | Visibility of the loader
+| buttonText | `Close` | `string` | Popup button text
+| style |  | `ViewStyle` | Style of the container
+| contentStyle |  | `ViewStyle` | Style of the Popup container
+| iconContentStyle |  | `ViewStyle` | Style of the icon container
+| iconColor | `#000` | `string` | The color of the icon
+| textBodyStyle |  | `TextStyle` | Style of the Popup's text body
+| buttonStyle |  | `ViewStyle` | Style of the Popup's button
+| buttonTextStyle |  | `TextStyle` | Popup's button text style
+| spinnerColor | | `string` | Color of the spinner
+| spinner | | `string` | Type of the spinner
 
 ## Contributing
 

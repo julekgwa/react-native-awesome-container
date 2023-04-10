@@ -6,7 +6,7 @@ import NetInfo from '@react-native-community/netinfo';
 
 interface Props {
   showPopup?: boolean;
-  popupType?: 'Danger' | 'Success' | 'Network';
+  popupType?: 'Danger' | 'Success' | 'Warning';
   popupTitle?: string;
   popupMessage?: string;
   onPressPopup?: (event: GestureResponderEvent) => void;
@@ -72,7 +72,7 @@ export function Container({
 
       <Popup
         visible={showPopup || !isConnectedToTheWifi}
-        type={popupType || 'Network'}
+        type={popupType || 'Warning'}
         title={popupTitle}
         iconColor={iconColor}
         contentStyle={contentStyle}
@@ -80,7 +80,7 @@ export function Container({
         textBodyStyle={textBodyStyle}
         buttonStyle={buttonStyle}
         buttonTextStyle={buttonTextStyle}
-        textBody={popupMessage || 'message'}
+        textBody={popupMessage}
         callback={onPressPopup || updateNet}
         buttonText={buttonText || 'Close'}
       />

@@ -1,7 +1,7 @@
 export const POPUP_TYPE = {
   Danger: 'Danger',
   Success: 'Success',
-  Network: 'Network',
+  Warning: 'Warning',
 };
 
 export const SPINNERS = {
