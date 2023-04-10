@@ -1,5 +1,5 @@
 # react-native-awesome-container
-
+[![npm](https://img.shields.io/npm/v/react-native-awesome-container.svg)](https://www.npmjs.com/package/react-native-awesome-container) [![GitHub stars](https://img.shields.io/github/stars/julekgwa/react-native-awesome-container.svg?style=social&label=Stars)](https://github.com/julekgwa/react-native-awesome-container) [![gzip size](http://img.badgesize.io/https://unpkg.com/react-native-awesome-container/src/index.tsx?compression=gzip)](https://unpkg.com/react-native-awesome-container/dist/index.js) ![npm](https://img.shields.io/npm/dw/react-native-awesome-container)
 ![header](example/assets/awesome-container.png)
 
 An easy-to-use React Native library that provides a View component with built-in loaders and popups. This library is designed to simplify the process of adding loading and popup functionality to your React Native Views with minimal setup.
