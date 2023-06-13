@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-container",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "An easy-to-use React Native library that provides a View component with built-in loaders and popups. This library is designed to simplify the process of adding loading and popup functionality to your React Native Views with minimal setup.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
