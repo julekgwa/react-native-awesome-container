@@ -4,7 +4,7 @@ import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
-interface Props {
+export interface AwesomeContainerProps {
   showPopup?: boolean;
   popupType?: 'Danger' | 'Success' | 'Warning';
   popupTitle?: string;
@@ -54,7 +54,7 @@ export function Container({
   buttonTextStyle,
   spinner,
   spinnerColor,
-}: Props) {
+}: AwesomeContainerProps) {
   const [isConnectedToTheWifi, setIsConnectedToTheWifi] = React.useState(true);
   const updateNet = () => setIsConnectedToTheWifi(true);
 
