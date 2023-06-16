@@ -84,7 +84,8 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-svg": "*"
   },
   "engines": {
     "node": ">= 16.0.0"
@@ -167,7 +168,6 @@
     "@react-native-community/netinfo": "*",
     "react-native-animated-spinkit": "*",
     "react-native-modal": "*",
-    "react-native-size-matters": "*",
-    "react-native-svg": "*"
+    "react-native-size-matters": "*"
   }
 }
