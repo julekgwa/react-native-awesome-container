@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button } from 'react-native';
-import { Container } from 'react-native-awesome-container';
+import { Container, PopupType } from 'react-native-awesome-container';
 
 export default function App() {
   const [showPopup, setShowPopup] = React.useState(false);
@@ -39,7 +39,7 @@ export default function App() {
         }
         popupTitle="Error"
         buttonText="OK"
-        popupType={'Danger'}
+        popupType={PopupType.Warning}
         onPressPopup={() => setShowPopup(false)}
         showPopup={showPopup}
         spinner={'Grid'}

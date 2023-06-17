@@ -4,9 +4,14 @@ import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
+export enum PopupType {
+  Danger = 'Danger',
+  Success = 'Success',
+  Warning = 'Warning',
+}
 export interface AwesomeContainerProps {
   showPopup?: boolean;
-  popupType?: 'Danger' | 'Success' | 'Warning';
+  popupType?: PopupType;
   popupTitle?: string;
   popupMessage?: string;
   onPressPopup?: (event: GestureResponderEvent) => void;
@@ -72,7 +77,7 @@ export function Container({
 
       <Popup
         visible={showPopup || !isConnectedToTheWifi}
-        type={popupType || 'Warning'}
+        type={popupType || PopupType.Warning}
         title={popupTitle}
         iconColor={iconColor}
         contentStyle={contentStyle}

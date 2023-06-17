@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { Colors } from '../colors';
 
 import React from 'react';
@@ -12,8 +10,8 @@ import { POPUP_TYPE } from '../constants';
 import { Text } from 'react-native';
 import { TickIcon } from './svg/TickIcon';
 import { CloseIcon } from './svg/CloseIcon';
-import { WifiIcon } from './svg/WifiIcon';
 import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
+import { InfoIcon } from './svg/InfoIcon';
 
 interface Props {
   visible?: boolean;
@@ -21,13 +19,18 @@ interface Props {
   title?: string;
   textBody?: string;
   buttonText?: string;
+  secondaryButtonText?: string;
   contentStyle?: ViewStyle;
   iconContentStyle?: ViewStyle;
   iconColor?: string;
   textBodyStyle?: TextStyle;
+  headerTextStyle?: TextStyle;
   buttonStyle?: ViewStyle;
   buttonTextStyle?: TextStyle;
+  secondaryButtonTextStyle?: TextStyle;
+  secondaryButtonStyle?: ViewStyle;
   callback?: (event: GestureResponderEvent) => void;
+  secondaryCallback?: (event: GestureResponderEvent) => void;
 }
 
 const renderIcon = (type: string, color?: string) => {
@@ -38,7 +41,7 @@ const renderIcon = (type: string, color?: string) => {
     case type === POPUP_TYPE.Danger:
       return <CloseIcon color={color} />;
     default:
-      return <WifiIcon color={color} />;
+      return <InfoIcon color={color} />;
   }
 };
 
@@ -60,6 +63,10 @@ export const Popup = ({
   title,
   textBody,
   buttonText,
+  secondaryButtonText,
+  secondaryButtonStyle,
+  secondaryButtonTextStyle,
+  headerTextStyle,
   contentStyle,
   textBodyStyle,
   buttonStyle,
@@ -67,6 +74,7 @@ export const Popup = ({
   iconColor,
   iconContentStyle,
   callback = () => {},
+  secondaryCallback = () => {},
 }: Props) => {
   return (
     <Modal backdropOpacity={0.3} isVisible={visible}>
@@ -83,7 +91,7 @@ export const Popup = ({
           {type && <View>{renderIcon(type, iconColor)}</View>}
         </View>
         <View style={styles.titleContainer}>
-          <Text style={[styles.Title]}>{title}</Text>
+          <Text style={[styles.Title, headerTextStyle]}>{title}</Text>
           <View
             style={[
               styles.underline,
@@ -95,38 +103,42 @@ export const Popup = ({
         </View>
         <View style={[styles.Content, contentStyle]}>
           <Text style={[styles.Desc, textBodyStyle]}>{textBody}</Text>
-          <TouchableOpacity
-            style={[styles.Button, buttonStyle]}
-            onPress={callback}
-          >
-            <Text
-              style={[
-                styles.TextButton,
-                { color: getIconBgColor(type) },
-                buttonTextStyle,
-              ]}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.Button, buttonStyle]}
+              onPress={callback}
             >
-              {buttonText}
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  styles.TextButton,
+                  { color: getIconBgColor(type) },
+                  buttonTextStyle,
+                ]}
+              >
+                {buttonText}
+              </Text>
+            </TouchableOpacity>
+            {secondaryButtonText && (
+              <TouchableOpacity
+                style={[styles.Button, secondaryButtonStyle]}
+                onPress={secondaryCallback}
+              >
+                <Text
+                  style={[
+                    styles.TextButton,
+                    { color: getIconBgColor(type) },
+                    secondaryButtonTextStyle,
+                  ]}
+                >
+                  {secondaryButtonText}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </View>
     </Modal>
   );
-};
-
-Popup.propTypes = {
-  buttonText: PropTypes.string,
-  callback: PropTypes.func,
-  textBody: PropTypes.string,
-  title: PropTypes.string,
-  type: PropTypes.string,
-  visible: PropTypes.bool,
-};
-
-Popup.defaultProps = {
-  visible: false,
-  callback: () => {},
 };
 
 const styles = StyleSheet.create({
@@ -187,7 +199,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
     paddingHorizontal: 10,
-    width: '100%',
   },
   imageContainer: {
     position: 'absolute',
@@ -203,6 +214,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: verticalScale(16),
     textTransform: 'uppercase',
+    textAlign: 'center',
   },
   dialog: {
     padding: scale(20),
@@ -220,5 +232,9 @@ const styles = StyleSheet.create({
   underline: {
     height: scale(2),
     width: '15%',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: verticalScale(10),
   },
 });
