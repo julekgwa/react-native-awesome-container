@@ -15,9 +15,14 @@ export interface AwesomeContainerProps {
   popupTitle?: string;
   popupMessage?: string;
   onPressPopup?: (event: GestureResponderEvent) => void;
+  onPressSecondaryButton?: (event: GestureResponderEvent) => void;
   children: React.ReactNode;
+  headerTextStyle?: TextStyle;
   isLoading?: boolean;
   buttonText?: string;
+  secondaryButtonTextStyle?: TextStyle;
+  secondaryButtonStyle?: ViewStyle;
+  secondaryButtonText?: string;
   style?: ViewStyle;
   contentStyle?: ViewStyle;
   iconContentStyle?: ViewStyle;
@@ -59,6 +64,11 @@ export function Container({
   buttonTextStyle,
   spinner,
   spinnerColor,
+  headerTextStyle,
+  secondaryButtonText,
+  secondaryButtonStyle,
+  secondaryButtonTextStyle,
+  onPressSecondaryButton,
 }: AwesomeContainerProps) {
   const [isConnectedToTheWifi, setIsConnectedToTheWifi] = React.useState(true);
   const updateNet = () => setIsConnectedToTheWifi(true);
@@ -83,8 +93,13 @@ export function Container({
         contentStyle={contentStyle}
         iconContentStyle={iconContentStyle}
         textBodyStyle={textBodyStyle}
+        headerTextStyle={headerTextStyle}
         buttonStyle={buttonStyle}
         buttonTextStyle={buttonTextStyle}
+        secondaryButtonText={secondaryButtonText}
+        secondaryButtonStyle={secondaryButtonStyle}
+        secondaryButtonTextStyle={secondaryButtonTextStyle}
+        secondaryCallback={onPressSecondaryButton}
         textBody={popupMessage}
         callback={onPressPopup || updateNet}
         buttonText={buttonText || 'Close'}
