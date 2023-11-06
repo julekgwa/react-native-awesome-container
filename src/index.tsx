@@ -3,6 +3,7 @@ import React from 'react';
 import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
+import { moderateScale } from 'react-native-size-matters';
 
 export enum PopupType {
   Danger = 'Danger',
@@ -111,5 +112,7 @@ export function Container({
 }
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+    paddingHorizontal: moderateScale(18),
+  },
 });
