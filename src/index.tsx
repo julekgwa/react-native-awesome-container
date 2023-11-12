@@ -88,7 +88,11 @@ export function Container({
 
       <Popup
         visible={showPopup || !isConnectedToTheWifi}
-        type={!isConnectedToTheWifi ? PopupType.Warning : popupType || PopupType.Warning}
+        type={
+          !isConnectedToTheWifi
+            ? PopupType.Warning
+            : popupType || PopupType.Warning
+        }
         title={!isConnectedToTheWifi ? 'No connection :(' : popupTitle}
         iconColor={iconColor}
         contentStyle={contentStyle}
@@ -101,8 +105,10 @@ export function Container({
         secondaryButtonStyle={secondaryButtonStyle}
         secondaryButtonTextStyle={secondaryButtonTextStyle}
         secondaryCallback={onPressSecondaryButton}
-        textBody={!isConnectedToTheWifi ? 'No internet connection.' :popupMessage}
-        callback={!isConnectedToTheWifi ? updateNet :onPressPopup}
+        textBody={
+          !isConnectedToTheWifi ? 'No internet connection.' : popupMessage
+        }
+        callback={!isConnectedToTheWifi ? updateNet : onPressPopup}
         buttonText={buttonText || 'Close'}
       />
 
