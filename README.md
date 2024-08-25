@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
 | buttonTextStyle |  | `TextStyle` | Popup's button text style
 | spinnerColor | | `string` | Color of the spinner
 | spinner | | `string` | Type of the spinner
+| loaderOverlay | `false` | `boolean` | Visibility of the loader overlay
 
 ## Contributing
 
