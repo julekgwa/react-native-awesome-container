@@ -10,25 +10,30 @@ import { POPUP_TYPE } from '../constants';
 import { Text } from 'react-native';
 import { TickIcon } from './svg/TickIcon';
 import { CloseIcon } from './svg/CloseIcon';
-import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 import { InfoIcon } from './svg/InfoIcon';
 
 interface Props {
   visible?: boolean;
-  type?: string;
+  type?: 'Danger' | 'Success' | 'Warning';
   title?: string;
   textBody?: string;
   buttonText?: string;
   secondaryButtonText?: string;
-  contentStyle?: ViewStyle;
-  iconContentStyle?: ViewStyle;
+  contentStyle?: StyleProp<ViewStyle>;
+  iconContentStyle?: StyleProp<ViewStyle>;
   iconColor?: string;
-  textBodyStyle?: TextStyle;
-  headerTextStyle?: TextStyle;
-  buttonStyle?: ViewStyle;
-  buttonTextStyle?: TextStyle;
-  secondaryButtonTextStyle?: TextStyle;
-  secondaryButtonStyle?: ViewStyle;
+  textBodyStyle?: StyleProp<TextStyle>;
+  headerTextStyle?: StyleProp<TextStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
+  buttonTextStyle?: StyleProp<TextStyle>;
+  secondaryButtonTextStyle?: StyleProp<TextStyle>;
+  secondaryButtonStyle?: StyleProp<ViewStyle>;
   callback?: (event: GestureResponderEvent) => void;
   secondaryCallback?: (event: GestureResponderEvent) => void;
 }

@@ -1,37 +1,39 @@
 import { Loader, Popup } from './common';
 import React from 'react';
-import type { GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import { moderateScale } from 'react-native-size-matters';
 
-export enum PopupType {
-  Danger = 'Danger',
-  Success = 'Success',
-  Warning = 'Warning',
-}
-export interface AwesomeContainerProps {
+export type AwesomeContainerProps = {
   showPopup?: boolean;
-  popupType?: PopupType;
+  popupType?: 'Danger' | 'Success' | 'Warning';
   popupTitle?: string;
   popupMessage?: string;
   onPressPopup?: (event: GestureResponderEvent) => void;
   onPressSecondaryButton?: (event: GestureResponderEvent) => void;
   children: React.ReactNode;
-  headerTextStyle?: TextStyle;
+  headerTextStyle?: StyleProp<TextStyle>;
   isLoading?: boolean;
   buttonText?: string;
-  secondaryButtonTextStyle?: TextStyle;
-  secondaryButtonStyle?: ViewStyle;
+  secondaryButtonTextStyle?: StyleProp<TextStyle>;
+  secondaryButtonStyle?: StyleProp<ViewStyle>;
   secondaryButtonText?: string;
-  style?: ViewStyle;
-  contentStyle?: ViewStyle;
-  iconContentStyle?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<ViewStyle>;
+  iconContentStyle?: StyleProp<ViewStyle>;
   iconColor?: string;
-  textBodyStyle?: TextStyle;
-  buttonStyle?: ViewStyle;
-  buttonTextStyle?: TextStyle;
+  textBodyStyle?: StyleProp<TextStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
+  overlayStyle?: StyleProp<ViewStyle>;
+  buttonTextStyle?: StyleProp<TextStyle>;
   spinnerColor?: string;
+  loaderOverlay?: boolean;
   spinner?:
     | 'CircleFade'
     | 'Plane'
@@ -45,7 +47,7 @@ export interface AwesomeContainerProps {
     | 'Grid'
     | 'Fold'
     | 'Wander';
-}
+};
 
 export function Container({
   showPopup,
@@ -70,6 +72,8 @@ export function Container({
   secondaryButtonStyle,
   secondaryButtonTextStyle,
   onPressSecondaryButton,
+  loaderOverlay,
+  overlayStyle,
 }: AwesomeContainerProps) {
   const [isConnectedToTheWifi, setIsConnectedToTheWifi] = React.useState(true);
   const updateNet = () => setIsConnectedToTheWifi(true);
@@ -83,42 +87,53 @@ export function Container({
   );
 
   return (
-    <View style={[styles.main, style]}>
-      {!isLoading && children}
+    <>
+      <View style={[styles.main, style]}>
+        {!isLoading || loaderOverlay ? children : null}
 
-      <Popup
-        visible={showPopup || !isConnectedToTheWifi}
-        type={
-          !isConnectedToTheWifi
-            ? PopupType.Warning
-            : popupType || PopupType.Warning
-        }
-        title={!isConnectedToTheWifi ? 'No connection :(' : popupTitle}
-        iconColor={iconColor}
-        contentStyle={contentStyle}
-        iconContentStyle={iconContentStyle}
-        textBodyStyle={textBodyStyle}
-        headerTextStyle={headerTextStyle}
-        buttonStyle={buttonStyle}
-        buttonTextStyle={buttonTextStyle}
-        secondaryButtonText={secondaryButtonText}
-        secondaryButtonStyle={secondaryButtonStyle}
-        secondaryButtonTextStyle={secondaryButtonTextStyle}
-        secondaryCallback={onPressSecondaryButton}
-        textBody={
-          !isConnectedToTheWifi ? 'No internet connection.' : popupMessage
-        }
-        callback={!isConnectedToTheWifi ? updateNet : onPressPopup}
-        buttonText={buttonText || 'Close'}
-      />
+        <Popup
+          visible={showPopup || !isConnectedToTheWifi}
+          type={!isConnectedToTheWifi ? 'Warning' : popupType || 'Warning'}
+          title={!isConnectedToTheWifi ? 'No connection :(' : popupTitle}
+          iconColor={iconColor}
+          contentStyle={contentStyle}
+          iconContentStyle={iconContentStyle}
+          textBodyStyle={textBodyStyle}
+          headerTextStyle={headerTextStyle}
+          buttonStyle={buttonStyle}
+          buttonTextStyle={buttonTextStyle}
+          secondaryButtonText={secondaryButtonText}
+          secondaryButtonStyle={secondaryButtonStyle}
+          secondaryButtonTextStyle={secondaryButtonTextStyle}
+          secondaryCallback={onPressSecondaryButton}
+          textBody={
+            !isConnectedToTheWifi ? 'No internet connection.' : popupMessage
+          }
+          callback={!isConnectedToTheWifi ? updateNet : onPressPopup}
+          buttonText={buttonText || 'Close'}
+        />
 
-      {isLoading && <Loader color={spinnerColor} spinner={spinner} />}
-    </View>
+        {isLoading && !loaderOverlay && (
+          <Loader color={spinnerColor} spinner={spinner} />
+        )}
+      </View>
+      {isLoading && loaderOverlay && (
+        <View style={[styles.loaderContainer, overlayStyle]}>
+          <Loader color={spinnerColor} spinner={spinner} />
+        </View>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     paddingHorizontal: moderateScale(18),
+  },
+  loaderContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
