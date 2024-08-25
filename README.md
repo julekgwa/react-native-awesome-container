@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 | spinnerColor | | `string` | Color of the spinner
 | spinner | | `string` | Type of the spinner
 | loaderOverlay | `false` | `boolean` | Visibility of the loader overlay
+| overlayStyle |  | `ViewStyle` | Style of the loader overlay
 
 ## Contributing
 
