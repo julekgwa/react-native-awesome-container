@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button } from 'react-native';
-import { Container, PopupType } from 'react-native-awesome-container';
+import { Container } from 'react-native-awesome-container';
 
 export default function App() {
   const [showPopup, setShowPopup] = React.useState(false);
@@ -39,12 +39,13 @@ export default function App() {
         }
         popupTitle="Error"
         buttonText="OK"
-        popupType={PopupType.Warning}
+        popupType={'Warning'}
         onPressPopup={() => setShowPopup(false)}
         showPopup={showPopup}
         spinner={'Grid'}
         spinnerColor="blue"
         style={styles.box}
+        loaderOverlay={true}
       >
         <Button onPress={() => setShowPopup(true)} title="Show Popup" />
         <Button onPress={() => setIsLoading(true)} title="Show Loader" />
